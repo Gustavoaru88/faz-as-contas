@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}Política de privacidade e cookies | {{ site.nome }}{% endblock %}
+{% block descricao %}Como o {{ site.nome }} trata dados, cookies e anúncios.{% endblock %}
+
+{% block conteudo %}
+<article class="texto texto--pagina">
+  <h1>Política de privacidade e cookies</h1>
+  <p>Última atualização: {{ site.atualizado_em | data_br }}.</p>
+
+  <h2>Dados que você digita nos simuladores</h2>
+  <p>Os cálculos são feitos inteiramente no seu navegador. Não recebemos, armazenamos nem compartilhamos os valores que você digita. Ao usar o botão "Copiar link desta simulação", os valores ficam no endereço do link, e só quem receber esse link poderá vê-los.</p>
+
+  <h2>Estatísticas de acesso</h2>
+  <p>Podemos usar ferramentas de estatística, como o Google Analytics, para entender quantas pessoas visitam o site e quais páginas são mais úteis. Essas ferramentas usam cookies e coletam dados de navegação de forma agregada, como páginas visitadas, tipo de aparelho e região aproximada.</p>
+
+  <h2>Anúncios</h2>
+  <p>Este site pode exibir anúncios do Google AdSense. O Google e seus parceiros usam cookies para exibir anúncios com base nas visitas anteriores do usuário a este e a outros sites. Você pode desativar a publicidade personalizada nas <a href="https://adssettings.google.com" rel="noopener">configurações de anúncios do Google</a> e saber mais em <a href="https://policies.google.com/technologies/ads?hl=pt-BR" rel="noopener">como o Google usa cookies em publicidade</a>.</p>
+
+  <h2>Seus direitos (LGPD)</h2>
+  <p>De acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você pode solicitar informações sobre o tratamento de dados pessoais relacionados a você. Como não coletamos dados pessoais diretamente, a maior parte das informações de navegação fica com os serviços citados acima, que têm suas próprias políticas.</p>
+
+  <h2>Contato</h2>
+  <p>Dúvidas sobre esta política: <a href="mailto:{{ site.email_contato }}">{{ site.email_contato }}</a>.</p>
+</article>
+{% endblock %}

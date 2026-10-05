@@ -1,0 +1,104 @@
+{% extends "sim_layout.html" %}
+{% from "_macros.html" import campo %}
+
+{% block lead %}Compare dois caminhos com o mesmo dinheiro: financiar um imóvel ou morar de aluguel e investir o que sobrar. Veja qual deixa você com mais patrimônio, ano a ano.{% endblock %}
+
+{% block formulario %}
+<fieldset>
+  <legend>O imóvel e o financiamento</legend>
+  <div class="campo-dupla">
+    {{ campo("valorImovel", "Valor do imóvel", "400.000", prefixo="R$") }}
+    {{ campo("entrada", "Entrada", "80.000", prefixo="R$") }}
+  </div>
+  <div class="campo-dupla">
+    {{ campo("jurosAnual", "Juros do financiamento", "11,5", sufixo="% a.a.", ajuda="Use o custo efetivo total (CET) da proposta do banco.") }}
+    {{ campo("prazoAnos", "Prazo", "30", sufixo="anos") }}
+  </div>
+  {{ campo("custosCompraPct", "ITBI, escritura e registro", "4", sufixo="% do valor", ajuda="Varia de cidade para cidade. Consulte a prefeitura e o cartório.") }}
+  <p class="campo__rotulo-grupo" id="sistema-rotulo">Sistema de amortização</p>
+  <div class="alternador" role="radiogroup" aria-labelledby="sistema-rotulo">
+    <label><input type="radio" name="sistema" value="sac" checked> <span>SAC (parcela diminui)</span></label>
+    <label><input type="radio" name="sistema" value="price"> <span>Price (parcela fixa)</span></label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>O aluguel</legend>
+  <div class="campo-dupla">
+    {{ campo("aluguel", "Aluguel de um imóvel parecido", "2.000", prefixo="R$", ajuda="Por mês, sem condomínio e IPTU.") }}
+    {{ campo("reajusteAluguel", "Reajuste do aluguel", "4,5", sufixo="% a.a.") }}
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Cenário para os próximos anos</legend>
+  <div class="campo-dupla">
+    {{ campo("valorizacao", "Valorização do imóvel", "4", sufixo="% a.a.") }}
+    {{ campo("rendimento", "Rendimento dos investimentos", "9", sufixo="% a.a.", ajuda="Líquido, já sem imposto de renda.") }}
+  </div>
+  {{ campo("horizonteAnos", "Comparar ao longo de", "30", sufixo="anos") }}
+</fieldset>
+{% endblock %}
+
+{% block resultado %}
+<div class="veredito" id="veredito">
+  <p class="veredito__frase" id="r-frase"></p>
+  <p class="veredito__apoio" id="r-apoio"></p>
+</div>
+
+<dl class="indicadores">
+  <div>
+    <dt>Primeira parcela</dt>
+    <dd id="r-parcela">R$ 0</dd>
+    <p id="r-parcela-apoio"></p>
+  </div>
+  <div>
+    <dt>Juros pagos ao banco</dt>
+    <dd id="r-juros">R$ 0</dd>
+    <p id="r-juros-apoio"></p>
+  </div>
+  <div>
+    <dt>Custos para comprar</dt>
+    <dd id="r-custos">R$ 0</dd>
+    <p>ITBI, escritura e registro</p>
+  </div>
+</dl>
+
+<h2 class="resultado__titulo">Patrimônio de cada caminho</h2>
+<div class="legenda" aria-hidden="true">
+  <span class="legenda__item serie-a">Comprar financiado</span>
+  <span class="legenda__item serie-b">Alugar e investir</span>
+</div>
+<div id="grafico" class="grafico-caixa"></div>
+
+<details class="tabela-detalhe">
+  <summary>Ver a evolução ano a ano</summary>
+  <div class="tabela-rolagem">
+    <table>
+      <thead>
+        <tr><th scope="col">Ano</th><th scope="col">Comprar</th><th scope="col">Alugar e investir</th><th scope="col">Saldo devedor</th></tr>
+      </thead>
+      <tbody id="tabela"></tbody>
+    </table>
+  </div>
+</details>
+{% endblock %}
+
+{% block metodologia %}
+<h2>Como a conta é feita</h2>
+<p>A comparação só é justa se os dois caminhos gastarem o mesmo dinheiro. Por isso o simulador acompanha duas pessoas com o mesmo orçamento, mês a mês:</p>
+<ul>
+  <li><strong>Quem compra</strong> paga a entrada, os custos de cartório e ITBI e as parcelas do financiamento. Se em algum mês a parcela for menor que o aluguel daquela época, investe a diferença.</li>
+  <li><strong>Quem aluga</strong> aplica no primeiro mês o dinheiro da entrada e dos custos de compra. Todo mês em que a parcela seria maior que o aluguel, investe a diferença.</li>
+</ul>
+<p>O patrimônio de quem compra é o valor do imóvel valorizado, menos o que ainda deve ao banco, mais os investimentos. O de quem aluga é o total investido com os rendimentos. As taxas anuais são convertidas em mensais por juros compostos, e o aluguel é reajustado uma vez por ano.</p>
+<p>No sistema SAC, a amortização é o valor financiado dividido pelo número de meses, e os juros incidem sobre o saldo devedor. Na tabela Price, a parcela é calculada para ser fixa durante todo o prazo.</p>
+
+<h2>O que pesa mais no resultado</h2>
+<p>Três números costumam decidir a comparação: a relação entre aluguel e valor do imóvel, a diferença entre os juros do financiamento e o rendimento dos investimentos, e a valorização do imóvel. Quando o aluguel anual é baixo em relação ao preço do imóvel, alugar e investir tende a ganhar. Mude esses campos e veja quanto o resultado se move antes de tirar conclusões.</p>
+<p>Na prática, o caminho do aluguel só funciona se a diferença for realmente investida todo mês. Se você sabe que gastaria esse dinheiro, a compra funciona como uma poupança forçada.</p>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ raiz }}static/js/pages/imovel.js"></script>
+{% endblock %}

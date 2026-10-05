@@ -1,0 +1,68 @@
+{% extends "sim_layout.html" %}
+{% from "_macros.html" import campo %}
+
+{% block lead %}Descubra quais aparelhos mais pesam na sua conta de luz, em kWh e em reais. Ajuste a lista para a sua casa e use a tarifa da sua própria conta.{% endblock %}
+
+{% block formulario %}
+<fieldset>
+  <legend>Sua tarifa</legend>
+  {{ campo("tarifa", "Quanto você paga por kWh", "0,95", prefixo="R$", ajuda="Divida o valor total da última conta pelos kWh consumidos. Assim já entram impostos e bandeira.") }}
+</fieldset>
+
+<fieldset>
+  <legend>Seus aparelhos</legend>
+  <p class="campo__ajuda campo__ajuda--topo">Potência em watts (W), quantas horas por dia fica ligado e em quantos dias do mês.</p>
+  <ul class="aparelhos" id="aparelhos"></ul>
+  <div class="aparelhos__adicionar">
+    <label for="catalogo" class="visualmente-oculto">Escolha um aparelho para adicionar</label>
+    <select id="catalogo">
+      <option value="">Adicionar aparelho…</option>
+    </select>
+    <button type="button" class="botao-secundario" id="adicionar-vazio">Adicionar outro</button>
+  </div>
+</fieldset>
+{% endblock %}
+
+{% block resultado %}
+<div class="veredito" id="veredito">
+  <p class="veredito__frase">Esses aparelhos somam <mark id="r-total">R$ 0</mark> por mês na conta de luz.</p>
+  <p class="veredito__apoio" id="r-apoio"></p>
+</div>
+
+<dl class="indicadores">
+  <div>
+    <dt>Consumo por mês</dt>
+    <dd id="r-kwh">0 kWh</dd>
+    <p>Compare com o consumo da sua conta</p>
+  </div>
+  <div>
+    <dt>Gasto em um ano</dt>
+    <dd id="r-ano">R$ 0</dd>
+    <p>Mantendo o mesmo uso</p>
+  </div>
+  <div>
+    <dt>Usando o maior gasto 20% menos</dt>
+    <dd id="r-economia">R$ 0</dd>
+    <p id="r-economia-apoio">de economia por mês</p>
+  </div>
+</dl>
+
+<h2 class="resultado__titulo">Gasto de cada aparelho, por mês</h2>
+<div id="composicao"></div>
+{% endblock %}
+
+{% block metodologia %}
+<h2>Como a conta é feita</h2>
+<p>O consumo de cada aparelho, em quilowatt-hora (kWh), é a potência em watts multiplicada pelas horas de uso por dia, pelos dias de uso no mês e pela quantidade de aparelhos, dividido por 1.000. O gasto em reais é esse consumo multiplicado pela sua tarifa por kWh.</p>
+<p>Exemplo: um chuveiro de 5.500 W ligado 30 minutos por dia, todos os dias, consome 5.500 × 0,5 × 30 ÷ 1.000 = 82,5 kWh por mês. Com tarifa de R$ 0,95, são cerca de R$ 78 por mês.</p>
+
+<h2>Por que usar a tarifa da sua conta</h2>
+<p>A tarifa publicada pela distribuidora não inclui ICMS, PIS, Cofins, bandeira tarifária nem a contribuição de iluminação pública, que mudam de estado para estado e de mês para mês. Dividir o valor total da conta pelos kWh consumidos dá o preço que você realmente paga por cada kWh.</p>
+
+<h2>Onde costuma estar o maior gasto</h2>
+<p>Aparelhos que esquentam ou esfriam, como chuveiro, ar-condicionado, aquecedor e forno elétrico, têm potência alta e costumam liderar a conta. A geladeira tem potência baixa, mas fica ligada o dia todo. Já lâmpadas LED e carregadores de celular pesam pouco. Concentre a economia nos primeiros itens da lista de resultados.</p>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ raiz }}static/js/pages/energia.js"></script>
+{% endblock %}

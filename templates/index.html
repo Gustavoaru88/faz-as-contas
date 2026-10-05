@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from "_macros.html" import anuncio %}
+
+{% block titulo %}{{ site.nome }}: simuladores financeiros para decisões do dia a dia{% endblock %}
+{% block descricao %}Simuladores gratuitos para decidir com números: vale a pena rodar de aplicativo, alugar ou financiar um imóvel, quanto cada aparelho gasta de energia e mais.{% endblock %}
+
+{% block conteudo %}
+<section class="capa">
+  <h1>Faça as contas antes de decidir.</h1>
+  <p class="capa__lead">Simuladores gratuitos para as decisões de dinheiro que todo mundo enfrenta. Você coloca os seus números, e a conta mostra o que o chute esconde.</p>
+</section>
+
+<section id="simuladores" class="bloco" aria-labelledby="sim-titulo">
+  <h2 id="sim-titulo" class="bloco__titulo">Escolha a pergunta</h2>
+  <ul class="lista-perguntas lista-perguntas--grande">
+    {% for s in ativos %}
+    <li>
+      <a href="{{ s.slug }}/">
+        <span class="lista-perguntas__cat">{{ s.categoria }}</span>
+        <span class="lista-perguntas__q">{{ s.pergunta }}</span>
+        <span class="lista-perguntas__r">{{ s.resumo }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% if em_breve %}
+  <h2 class="bloco__titulo bloco__titulo--menor">Em preparação</h2>
+  <ul class="lista-breve">
+    {% for s in em_breve %}
+    <li><span class="lista-breve__q">{{ s.pergunta }}</span> <span class="lista-breve__r">{{ s.resumo }}</span></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
+
+{{ anuncio(site) }}
+
+<section class="bloco principios" aria-labelledby="prin-titulo">
+  <h2 id="prin-titulo" class="bloco__titulo">Por que confiar nas contas</h2>
+  <div class="principios__grade">
+    <div>
+      <h3>A conta inteira, não só a parcela</h3>
+      <p>Desvalorização, rendimento que você deixa de ganhar, reajustes: entram os custos que costumam ficar de fora das contas rápidas.</p>
+    </div>
+    <div>
+      <h3>Seus números ficam com você</h3>
+      <p>Tudo é calculado no seu navegador. Nada do que você digita é enviado ou guardado por nós.</p>
+    </div>
+    <div>
+      <h3>Metodologia aberta</h3>
+      <p>Cada simulador explica as fórmulas que usa e o que deixa de fora, para você saber quando o resultado vale e quando não vale.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

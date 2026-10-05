@@ -1,0 +1,102 @@
+{% extends "sim_layout.html" %}
+{% from "_macros.html" import campo %}
+
+{% block lead %}Descubra quanto sobra de verdade rodando por Uber, 99 ou inDrive. A conta desconta combustível, manutenção, seguro e IPVA, e também a desvalorização do carro, o custo que quase ninguém coloca no papel.{% endblock %}
+
+{% block formulario %}
+<fieldset>
+  <legend>Seus ganhos e sua jornada</legend>
+  {{ campo("ganhoSemanal", "Quanto os apps pagam por semana", "1.500", prefixo="R$", ajuda="Valor bruto que cai na sua conta, somando todos os apps.") }}
+  <div class="campo-dupla">
+    {{ campo("kmSemana", "Km por semana", "1.000", sufixo="km", ajuda="Total do hodômetro, inclusive sem passageiro.") }}
+    {{ campo("horasSemana", "Horas por semana", "50", sufixo="h", ajuda="Inclua o tempo esperando corrida.") }}
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Combustível e manutenção</legend>
+  <div class="campo-dupla">
+    {{ campo("consumo", "Consumo do carro", "11", sufixo="km/l") }}
+    {{ campo("precoCombustivel", "Preço do litro", "6,29", prefixo="R$") }}
+  </div>
+  <div class="campo-dupla">
+    {{ campo("manutencaoKm", "Manutenção por km", "0,15", prefixo="R$", ajuda="Óleo, pneus, freios e revisões divididos pelos km do ano.") }}
+    {{ campo("outrosSemana", "Outros gastos semanais", "60", prefixo="R$", ajuda="Celular, lavagem, lanche na rua.") }}
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>O carro</legend>
+  <div class="alternador" role="radiogroup" aria-label="Tipo de carro">
+    <label><input type="radio" name="tipoCarro" value="proprio" checked> <span>Carro próprio</span></label>
+    <label><input type="radio" name="tipoCarro" value="alugado"> <span>Carro alugado</span></label>
+  </div>
+
+  <div id="grupo-proprio">
+    {{ campo("valorCarro", "Quanto o carro vale hoje", "60.000", prefixo="R$", ajuda="Valor de venda, pela tabela Fipe.") }}
+    <div class="campo-dupla">
+      {{ campo("depreciacaoAnual", "Desvalorização por ano", "10", sufixo="%", ajuda="Carros rodando muito perdem mais valor.") }}
+      {{ campo("rendimentoAnual", "Rendimento se aplicado", "10", sufixo="% a.a.", ajuda="Quanto o valor do carro renderia investido. Use 0 para ignorar.") }}
+    </div>
+    <div class="campo-dupla">
+      {{ campo("seguroAnual", "Seguro por ano", "3.000", prefixo="R$") }}
+      {{ campo("ipvaAnual", "IPVA e licenciamento", "2.400", prefixo="R$") }}
+    </div>
+  </div>
+
+  <div id="grupo-alugado" hidden>
+    {{ campo("aluguelSemanal", "Aluguel do carro por semana", "750", prefixo="R$", ajuda="Normalmente já inclui seguro e IPVA. Se a locadora cobre a manutenção, reduza o campo de manutenção por km.") }}
+  </div>
+</fieldset>
+{% endblock %}
+
+{% block resultado %}
+<div class="veredito" id="veredito">
+  <p class="veredito__frase">Seu lucro real é de <mark id="r-lucro-mes">R$ 0</mark> por mês.</p>
+  <p class="veredito__apoio" id="r-apoio"></p>
+</div>
+
+<dl class="indicadores">
+  <div>
+    <dt>Sobra no bolso por mês</dt>
+    <dd id="r-sobra-mes">R$ 0</dd>
+    <p>Antes da desvalorização do carro</p>
+  </div>
+  <div>
+    <dt>Lucro real por hora</dt>
+    <dd id="r-hora">R$ 0</dd>
+    <p id="r-hora-bruto"></p>
+  </div>
+  <div>
+    <dt>Custo por km rodado</dt>
+    <dd id="r-custo-km">R$ 0</dd>
+    <p id="r-ganho-km"></p>
+  </div>
+</dl>
+
+<h2 class="resultado__titulo">Para onde vai o dinheiro, por mês</h2>
+<div id="composicao"></div>
+<p class="nota" id="nota-oculto">Os itens em listra não saem do seu bolso todo mês, mas você perde esse valor quando vender o carro.</p>
+{% endblock %}
+
+{% block metodologia %}
+<h2>Como a conta é feita</h2>
+<p>O simulador separa o que você paga no dia a dia do que você perde sem perceber. Os valores semanais são convertidos em mensais multiplicando por 4,33, que é o número médio de semanas em um mês (52 semanas divididas por 12 meses).</p>
+<ul>
+  <li><strong>Combustível:</strong> km rodados divididos pelo consumo do carro, vezes o preço do litro.</li>
+  <li><strong>Manutenção:</strong> km rodados vezes o custo de manutenção por km.</li>
+  <li><strong>Seguro e IPVA:</strong> o valor anual dividido por 52 semanas.</li>
+  <li><strong>Desvalorização:</strong> o valor do carro vezes a perda anual de valor, dividido por 52.</li>
+  <li><strong>Rendimento perdido:</strong> o que o valor do carro renderia aplicado no mesmo período. É o custo de ter o dinheiro parado num carro em vez de investido.</li>
+</ul>
+<p>A <strong>sobra no bolso</strong> é o ganho bruto menos os gastos do dia a dia. O <strong>lucro real</strong> também desconta a desvalorização e o rendimento perdido. Para comparar com um emprego, o lucro por hora é colocado ao lado do salário mínimo de R$ {{ "{:,.0f}".format(site.salario_minimo).replace(",", ".") }} dividido por 220 horas, a jornada mensal de referência da CLT.</p>
+
+<h2>Como usar o resultado</h2>
+<p>Se o custo por km estiver perto do ganho por km, cada corrida longa sem passageiro na volta pode dar prejuízo. Nesse caso, vale filtrar corridas pelo valor por km antes de aceitar. Também compare carro próprio e alugado com os mesmos números: com quilometragem alta, a desvalorização de um carro próprio cresce e o aluguel pode sair mais barato.</p>
+<p>O resultado não inclui imposto de renda nem contribuição ao INSS. Se você for MEI, some o valor mensal do DAS em "outros gastos", dividido por 4,33.</p>
+{% endblock %}
+
+{% block scripts %}
+<script>window.SALARIO_MINIMO = {{ site.salario_minimo }};</script>
+<script type="module" src="{{ raiz }}static/js/pages/motorista.js"></script>
+{% endblock %}

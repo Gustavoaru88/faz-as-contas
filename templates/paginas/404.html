@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titulo %}Página não encontrada | {{ site.nome }}{% endblock %}
+
+{% block conteudo %}
+<article class="texto texto--pagina">
+  <h1>Essa conta não fechou.</h1>
+  <p>A página que você procurou não existe ou mudou de endereço. Escolha um dos simuladores abaixo.</p>
+  <ul class="lista-perguntas">
+    {% for s in ativos %}
+    <li><a href="{{ raiz }}{{ s.slug }}/"><span class="lista-perguntas__q">{{ s.pergunta }}</span><span class="lista-perguntas__r">{{ s.resumo }}</span></a></li>
+    {% endfor %}
+  </ul>
+</article>
+{% endblock %}

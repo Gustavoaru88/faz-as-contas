@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{{ site.nome }}{% endblock %}</title>
+  <meta name="description" content="{% block descricao %}{{ site.slogan }}{% endblock %}">
+  <link rel="canonical" href="{{ site.url_base }}/{{ caminho }}{% if caminho %}/{% endif %}">
+  <meta name="theme-color" content="#12304a">
+  {% if site.google_search_console %}<meta name="google-site-verification" content="{{ site.google_search_console }}">{% endif %}
+  {% if site.bing_webmaster %}<meta name="msvalidate.01" content="{{ site.bing_webmaster }}">{% endif %}
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{ site.nome }}">
+  <meta property="og:title" content="{{ self.titulo() }}">
+  <meta property="og:description" content="{{ self.descricao() }}">
+  <meta property="og:url" content="{{ site.url_base }}/{{ caminho }}{% if caminho %}/{% endif %}">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="{{ raiz }}static/img/icone.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ raiz }}static/css/estilo.css">
+
+  {% if site.google_analytics_id %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics_id }}');
+  </script>
+  {% endif %}
+  {% if site.adsense_client %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense_client }}" crossorigin="anonymous"></script>
+  {% endif %}
+  {% block dados_estruturados %}{% endblock %}
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topo">
+    <div class="topo__interno">
+      <a class="marca" href="{{ raiz }}">
+        <span class="marca__simbolo" aria-hidden="true">=</span>
+        <span>{{ site.nome }}</span>
+      </a>
+      <nav aria-label="Principal">
+        <a href="{{ raiz }}#simuladores">Simuladores</a>
+        <a href="{{ raiz }}sobre/">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__interno">
+      <div>
+        <p class="rodape__marca">{{ site.nome }}</p>
+        <p>{{ site.slogan }}</p>
+        <p class="rodape__aviso">Os resultados são estimativas educativas e não substituem a orientação de um profissional. Nenhum dado digitado sai do seu aparelho.</p>
+      </div>
+      <nav aria-label="Rodapé">
+        <p class="rodape__titulo">Simuladores</p>
+        {% for s in ativos %}
+        <a href="{{ raiz }}{{ s.slug }}/">{{ s.pergunta }}</a>
+        {% endfor %}
+      </nav>
+      <nav aria-label="Institucional">
+        <p class="rodape__titulo">O site</p>
+        <a href="{{ raiz }}sobre/">Sobre e metodologia</a>
+        <a href="{{ raiz }}privacidade/">Privacidade e cookies</a>
+        <a href="mailto:{{ site.email_contato }}">Contato</a>
+      </nav>
+    </div>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

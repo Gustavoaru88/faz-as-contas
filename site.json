@@ -1,0 +1,126 @@
+{
+  "nome": "Faz as Contas",
+  "slogan": "Simuladores para decidir com números, não no chute.",
+  "url_base": "https://gustavoaru88.github.io/faz-as-contas",
+  "dominio_proprio": "",
+  "email_contato": "contato@seudominio.com.br",
+  "atualizado_em": "2026-10-05",
+  "salario_minimo": 1621,
+
+  "adsense_client": "",
+  "google_analytics_id": "",
+  "google_search_console": "",
+  "bing_webmaster": "",
+
+  "simuladores": [
+    {
+      "slug": "motorista-de-aplicativo",
+      "status": "ativo",
+      "pergunta": "Vale a pena rodar de aplicativo?",
+      "titulo_seo": "Calculadora do motorista de aplicativo: quanto sobra de verdade",
+      "descricao": "Descubra quanto você lucra por hora e por mês como motorista de Uber, 99 ou inDrive, descontando combustível, manutenção, seguro, IPVA e a desvalorização do carro.",
+      "resumo": "Lucro real por hora e por mês, com carro próprio ou alugado.",
+      "categoria": "Trabalho e renda",
+      "faq": [
+        {
+          "p": "Qual a diferença entre \"sobra no bolso\" e \"lucro real\"?",
+          "r": "A sobra no bolso é o dinheiro que entra menos o que você paga no dia a dia: combustível, manutenção, seguro, IPVA, aluguel do carro e outros gastos. O lucro real também desconta a desvalorização do carro e o rendimento que o dinheiro do carro teria se estivesse aplicado. Esses dois custos não saem da sua conta todo mês, mas aparecem quando você vende o carro."
+        },
+        {
+          "p": "Devo contar os quilômetros rodados sem passageiro?",
+          "r": "Sim. O carro gasta combustível e se desgasta do mesmo jeito indo buscar o passageiro ou rodando à procura de corrida. Use a quilometragem total do hodômetro na semana, não só a soma das viagens."
+        },
+        {
+          "p": "Quanto custa a manutenção por quilômetro?",
+          "r": "Some o que você gasta por ano com troca de óleo, filtros, pneus, freios, revisões e consertos, e divida pela quilometragem anual. Para carros populares, valores entre R$ 0,10 e R$ 0,25 por km são comuns. Se o carro for alugado, a locadora costuma cobrir parte disso, então use um valor menor."
+        },
+        {
+          "p": "Carro alugado ou próprio: o que compensa mais?",
+          "r": "Depende da quilometragem e do valor do aluguel. O aluguel tem custo fixo alto, mas você não perde com desvalorização nem imobiliza dinheiro. Simule os dois cenários com os mesmos ganhos e quilômetros e compare o lucro real por hora."
+        }
+      ]
+    },
+    {
+      "slug": "alugar-ou-comprar-imovel",
+      "status": "ativo",
+      "pergunta": "Alugar ou financiar um imóvel?",
+      "titulo_seo": "Alugar ou comprar imóvel financiado? Simulador completo",
+      "descricao": "Compare alugar e investir a diferença com financiar um imóvel pelo SAC ou Price. Veja o patrimônio de cada caminho ano a ano, com valorização, reajuste do aluguel e rendimento dos investimentos.",
+      "resumo": "Patrimônio de cada caminho ano a ano, SAC ou Price.",
+      "categoria": "Moradia",
+      "faq": [
+        {
+          "p": "O simulador considera que o inquilino investe a diferença?",
+          "r": "Sim. Quem aluga investe o dinheiro da entrada e dos custos de compra no primeiro mês e, a cada mês em que a parcela do financiamento for maior que o aluguel, investe a diferença. Quando o aluguel fica mais caro que a parcela, é o comprador quem investe a diferença. Assim os dois caminhos gastam o mesmo dinheiro todo mês, e a comparação é justa."
+        },
+        {
+          "p": "Qual a diferença entre SAC e Price?",
+          "r": "No SAC a amortização é igual todo mês, então a primeira parcela é a mais alta e as seguintes diminuem. Na tabela Price a parcela é fixa, mas no começo quase tudo é juros, e o saldo devedor cai devagar. No total, o SAC costuma pagar menos juros."
+        },
+        {
+          "p": "Que rendimento devo usar para os investimentos?",
+          "r": "Use o rendimento líquido, já descontando imposto de renda, de uma aplicação que você realmente faria, como Tesouro Direto ou CDB. Usar um valor otimista demais favorece o aluguel; um valor baixo demais favorece a compra. Teste alguns cenários."
+        },
+        {
+          "p": "O que o simulador não considera?",
+          "r": "Seguros obrigatórios do financiamento, taxas administrativas do banco, uso do FGTS, IPTU, condomínio e custos de mudança ficam de fora, porque costumam pesar de forma parecida nos dois caminhos ou variam muito de caso a caso. Também não entra o valor emocional de ter a casa própria, que só você pode pesar."
+        }
+      ]
+    },
+    {
+      "slug": "consumo-de-energia",
+      "status": "ativo",
+      "pergunta": "Quanto cada aparelho pesa na conta de luz?",
+      "titulo_seo": "Calculadora de consumo de energia por aparelho",
+      "descricao": "Calcule quanto o chuveiro, o ar-condicionado, a geladeira e outros aparelhos gastam por mês na sua conta de luz, em kWh e em reais, usando a tarifa da sua conta.",
+      "resumo": "Gasto por aparelho em kWh e reais, com a sua tarifa.",
+      "categoria": "Casa",
+      "faq": [
+        {
+          "p": "Como descubro a tarifa real da minha conta?",
+          "r": "Pegue o valor total da última conta de luz e divida pelo consumo em kWh do mesmo mês. Por exemplo, uma conta de R$ 250 com consumo de 270 kWh dá cerca de R$ 0,93 por kWh. Esse número já inclui impostos, bandeira tarifária e iluminação pública, e é mais fiel do que a tarifa da tabela."
+        },
+        {
+          "p": "Onde encontro a potência do aparelho?",
+          "r": "Na etiqueta do próprio aparelho, no manual ou na caixa, em watts (W). No ar-condicionado e na geladeira, o selo Procel informa o consumo mensal em kWh, que é ainda mais preciso: nesse caso, ajuste horas e potência até chegar ao mesmo kWh."
+        },
+        {
+          "p": "Por que a geladeira aparece com potência baixa e 24 horas por dia?",
+          "r": "Porque o motor da geladeira liga e desliga sozinho ao longo do dia. Usamos uma potência média que, multiplicada por 24 horas, chega perto do consumo real de um modelo frost free comum. Se tiver o selo Procel, use o consumo informado nele."
+        },
+        {
+          "p": "Os valores batem exatamente com a conta?",
+          "r": "Ficam próximos, mas não idênticos. O consumo real varia com a temperatura, o modo de uso e a idade do aparelho, e a conta pode ter taxas que não dependem do consumo. Use o resultado para descobrir onde está o maior gasto, não como uma previsão exata da fatura."
+        }
+      ]
+    },
+    {
+      "slug": "financiamento-ou-consorcio",
+      "status": "em_breve",
+      "pergunta": "Financiar o carro ou entrar num consórcio?",
+      "resumo": "Custo total de cada opção e quanto tempo até ter o carro.",
+      "categoria": "Veículos"
+    },
+    {
+      "slug": "energia-solar",
+      "status": "em_breve",
+      "pergunta": "Em quanto tempo a energia solar se paga?",
+      "resumo": "Retorno do investimento com a tarifa da sua distribuidora.",
+      "categoria": "Casa"
+    },
+    {
+      "slug": "clt-ou-pj",
+      "status": "em_breve",
+      "pergunta": "CLT ou PJ: qual proposta paga mais?",
+      "resumo": "Salário, benefícios, impostos e férias lado a lado.",
+      "categoria": "Trabalho e renda"
+    },
+    {
+      "slug": "antecipar-ou-investir",
+      "status": "em_breve",
+      "pergunta": "Antecipar parcelas ou investir o dinheiro?",
+      "resumo": "Quanto você economiza de juros contra quanto renderia.",
+      "categoria": "Dívidas"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% from "_macros.html" import anuncio %}
+
+{% block titulo %}{{ sim.titulo_seo }} | {{ site.nome }}{% endblock %}
+{% block descricao %}{{ sim.descricao }}{% endblock %}
+
+{% block dados_estruturados %}
+<script type="application/ld+json">{{ dados_estruturados | safe }}</script>
+{% endblock %}
+
+{% block conteudo %}
+<div class="pagina-sim">
+  <nav class="trilha" aria-label="Você está em">
+    <a href="{{ raiz }}">Início</a>
+    <span aria-hidden="true">/</span>
+    <span>{{ sim.categoria }}</span>
+  </nav>
+
+  <header class="sim-cabecalho">
+    <h1>{{ sim.pergunta }}</h1>
+    <p class="sim-cabecalho__lead">{% block lead %}{{ sim.descricao }}{% endblock %}</p>
+  </header>
+
+  <section class="ferramenta" aria-label="Simulador">
+    <form class="ferramenta__form" id="form" novalidate>
+      {% block formulario %}{% endblock %}
+      <div class="ferramenta__acoes">
+        <button type="button" class="botao-secundario" id="restaurar">Voltar aos valores de exemplo</button>
+      </div>
+    </form>
+
+    <div class="ferramenta__resultado" aria-live="polite">
+      {% block resultado %}{% endblock %}
+      <div class="compartilhar">
+        <button type="button" class="botao" id="copiar-link">Copiar link desta simulação</button>
+        <span class="compartilhar__aviso" id="copiar-aviso" role="status"></span>
+      </div>
+    </div>
+  </section>
+
+  {{ anuncio(site) }}
+
+  <article class="texto">
+    {% block metodologia %}{% endblock %}
+
+    <h2 id="perguntas">Perguntas frequentes</h2>
+    <div class="faq">
+      {% for item in sim.faq %}
+      <details>
+        <summary>{{ item.p }}</summary>
+        <p>{{ item.r }}</p>
+      </details>
+      {% endfor %}
+    </div>
+
+    <p class="texto__atualizado">Atualizado em {{ site.atualizado_em | data_br }}. Os resultados são estimativas e não constituem recomendação financeira.</p>
+  </article>
+
+  {{ anuncio(site) }}
+
+  <section class="relacionados" aria-labelledby="rel-titulo">
+    <h2 id="rel-titulo">Outras contas para fazer</h2>
+    <ul class="lista-perguntas">
+      {% for r in relacionados %}
+      <li><a href="{{ raiz }}{{ r.slug }}/"><span class="lista-perguntas__q">{{ r.pergunta }}</span><span class="lista-perguntas__r">{{ r.resumo }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

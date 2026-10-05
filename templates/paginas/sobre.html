@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}Sobre o {{ site.nome }} e nossa metodologia{% endblock %}
+{% block descricao %}Quem faz o {{ site.nome }}, como os simuladores são construídos e quais são os limites dos resultados.{% endblock %}
+
+{% block conteudo %}
+<article class="texto texto--pagina">
+  <h1>Sobre o {{ site.nome }}</h1>
+  <p>O {{ site.nome }} reúne simuladores gratuitos para decisões financeiras do dia a dia: rodar de aplicativo, alugar ou financiar um imóvel, entender a conta de luz e outras escolhas em que um cálculo bem feito muda a resposta.</p>
+
+  <h2>Como construímos os simuladores</h2>
+  <p>Cada simulador parte de uma pergunta concreta e inclui os custos que as contas rápidas costumam esquecer, como a desvalorização de um carro ou o rendimento que o dinheiro teria se estivesse investido. As fórmulas estão descritas na própria página de cada simulador, junto com o que fica de fora do cálculo.</p>
+  <p>Os valores que aparecem preenchidos são apenas exemplos para mostrar como a ferramenta funciona. O resultado só faz sentido para você quando os números são os seus.</p>
+
+  <h2>Limites dos resultados</h2>
+  <p>Os simuladores produzem estimativas educativas. Eles não substituem a análise de um contador, planejador financeiro ou advogado, e não são recomendação de compra, venda ou investimento. Taxas, impostos e regras mudam com o tempo; revisamos as páginas periodicamente e indicamos a data da última atualização em cada uma.</p>
+
+  <h2>Privacidade</h2>
+  <p>Todos os cálculos acontecem no seu navegador. Os números que você digita não são enviados para nenhum servidor. Veja a <a href="{{ raiz }}privacidade/">política de privacidade</a> para saber sobre cookies e anúncios.</p>
+
+  <h2>Contato</h2>
+  <p>Encontrou um erro, tem uma sugestão de simulador ou quer falar com a gente? Escreva para <a href="mailto:{{ site.email_contato }}">{{ site.email_contato }}</a>.</p>
+</article>
+{% endblock %}
