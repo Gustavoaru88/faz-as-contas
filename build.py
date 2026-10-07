@@ -18,6 +18,16 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 RAIZ = Path(__file__).parent
 SAIDA = RAIZ / "dist"
 
+# Cor do ícone de cada categoria (classes definidas em estilo.css).
+# Ao criar uma categoria nova, acrescente aqui; sem isso ela fica verde.
+CORES_CATEGORIA = {
+    "Trabalho e renda": "azul",
+    "Moradia": "verde",
+    "Casa": "ambar",
+    "Veículos": "violeta",
+    "Dívidas": "rosa",
+}
+
 
 def carregar_config():
     config = json.loads((RAIZ / "site.json").read_text(encoding="utf-8"))
@@ -86,8 +96,15 @@ def main():
     SAIDA.mkdir()
     shutil.copytree(RAIZ / "static", SAIDA / "static")
 
+    for s in config["simuladores"]:
+        s["cor"] = CORES_CATEGORIA.get(s["categoria"], "verde")
     ativos = [s for s in config["simuladores"] if s["status"] == "ativo"]
     em_breve = [s for s in config["simuladores"] if s["status"] != "ativo"]
+    categorias = []
+    for s in config["simuladores"]:
+        if s["categoria"] not in categorias:
+            categorias.append(s["categoria"])
+    env.globals["categorias"] = categorias
     paginas = []  # (caminho relativo, prioridade) para o sitemap
 
     def render(template, destino, **contexto):

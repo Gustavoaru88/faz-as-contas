@@ -56,10 +56,25 @@ export function ligarFormulario({ calcular, estadoExtra, restaurarExtra }) {
   }
   restaurarExtra?.(params.toString() ? params : null);
 
+  // atalho fixo no celular: mostra o número principal enquanto o resultado está fora da tela
+  const atalho = document.getElementById("atalho-resultado");
+  const resultado = document.getElementById("resultado");
+  const calcularTudo = () => {
+    calcular();
+    const mark = document.querySelector(".veredito mark");
+    if (atalho && mark) document.getElementById("atalho-valor").textContent = mark.textContent;
+  };
+  ligarFormulario.recalcular = calcularTudo;
+  if (atalho && resultado && "IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => {
+      atalho.hidden = e.isIntersecting || e.boundingClientRect.top < 0;
+    }).observe(resultado);
+  }
+
   let pendente = null;
   const agendar = () => {
     cancelAnimationFrame(pendente);
-    pendente = requestAnimationFrame(calcular);
+    pendente = requestAnimationFrame(calcularTudo);
   };
   form.addEventListener("input", agendar);
   form.addEventListener("change", agendar);
@@ -82,7 +97,7 @@ export function ligarFormulario({ calcular, estadoExtra, restaurarExtra }) {
     }
     restaurarExtra?.(null);
     history.replaceState(null, "", location.pathname);
-    calcular();
+    ligarFormulario.recalcular();
   });
 
   const botao = document.getElementById("copiar-link");
@@ -105,7 +120,7 @@ export function ligarFormulario({ calcular, estadoExtra, restaurarExtra }) {
     setTimeout(() => (aviso.textContent = ""), 5000);
   });
 
-  calcular();
+  calcularTudo();
 }
 
 /** Lê os campos numéricos do formulário pelo id. */

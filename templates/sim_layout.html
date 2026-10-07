@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_macros.html" import anuncio %}
+{% from "_icones.html" import icone, cartao %}
 
 {% block titulo %}{{ sim.titulo_seo }} | {{ site.nome }}{% endblock %}
 {% block descricao %}{{ sim.descricao }}{% endblock %}
@@ -9,34 +10,47 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="pagina-sim">
-  <nav class="trilha" aria-label="Você está em">
-    <a href="{{ raiz }}">Início</a>
-    <span aria-hidden="true">/</span>
-    <span>{{ sim.categoria }}</span>
-  </nav>
-
-  <header class="sim-cabecalho">
-    <h1>{{ sim.pergunta }}</h1>
-    <p class="sim-cabecalho__lead">{% block lead %}{{ sim.descricao }}{% endblock %}</p>
-  </header>
-
-  <section class="ferramenta" aria-label="Simulador">
-    <form class="ferramenta__form" id="form" novalidate>
-      {% block formulario %}{% endblock %}
-      <div class="ferramenta__acoes">
-        <button type="button" class="botao-secundario" id="restaurar">Voltar aos valores de exemplo</button>
+<div class="sim-topo">
+  <div class="sim-topo__interno">
+    <nav class="trilha" aria-label="Você está em">
+      <a href="{{ raiz }}">Calculadoras</a>
+      <span aria-hidden="true">›</span>
+      <span>{{ sim.categoria }}</span>
+    </nav>
+    <div class="sim-topo__titulo">
+      <span class="sim-topo__icone tom-{{ sim.cor }}">{{ icone(sim.icone) }}</span>
+      <div>
+        <h1>{{ sim.nome }}</h1>
+        <p class="sim-topo__lead">{% block lead %}{{ sim.descricao }}{% endblock %}</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="pagina-sim">
+  <section class="ferramenta" aria-label="Calculadora">
+    <form class="ferramenta__form" id="form" novalidate>
+      <div class="ferramenta__cabecalho">
+        <h2>Seus dados</h2>
+        <button type="button" class="botao-texto" id="restaurar">Limpar para o exemplo</button>
+      </div>
+      {% block formulario %}{% endblock %}
     </form>
 
-    <div class="ferramenta__resultado" aria-live="polite">
+    <div class="ferramenta__resultado" id="resultado" aria-live="polite">
       {% block resultado %}{% endblock %}
       <div class="compartilhar">
-        <button type="button" class="botao" id="copiar-link">Copiar link desta simulação</button>
+        <button type="button" class="botao" id="copiar-link">{{ icone("link") }} Copiar link da simulação</button>
         <span class="compartilhar__aviso" id="copiar-aviso" role="status"></span>
       </div>
     </div>
   </section>
+
+  <a class="atalho-resultado" id="atalho-resultado" href="#resultado" hidden>
+    <span class="atalho-resultado__rotulo">Resultado</span>
+    <strong class="atalho-resultado__valor" id="atalho-valor"></strong>
+    <span class="atalho-resultado__ver">Ver detalhes</span>
+  </a>
 
   {{ anuncio(site) }}
 
@@ -59,11 +73,9 @@
   {{ anuncio(site) }}
 
   <section class="relacionados" aria-labelledby="rel-titulo">
-    <h2 id="rel-titulo">Outras contas para fazer</h2>
-    <ul class="lista-perguntas">
-      {% for r in relacionados %}
-      <li><a href="{{ raiz }}{{ r.slug }}/"><span class="lista-perguntas__q">{{ r.pergunta }}</span><span class="lista-perguntas__r">{{ r.resumo }}</span></a></li>
-      {% endfor %}
+    <h2 id="rel-titulo">Outras calculadoras</h2>
+    <ul class="cartoes cartoes--compacto">
+      {% for r in relacionados %}{{ cartao(r, raiz) }}{% endfor %}
     </ul>
   </section>
 </div>

@@ -1,14 +1,13 @@
 {% extends "base.html" %}
+{% from "_icones.html" import cartao %}
 {% block titulo %}Página não encontrada | {{ site.nome }}{% endblock %}
 
 {% block conteudo %}
 <article class="texto texto--pagina">
   <h1>Essa conta não fechou.</h1>
-  <p>A página que você procurou não existe ou mudou de endereço. Escolha um dos simuladores abaixo.</p>
-  <ul class="lista-perguntas">
-    {% for s in ativos %}
-    <li><a href="{{ raiz }}{{ s.slug }}/"><span class="lista-perguntas__q">{{ s.pergunta }}</span><span class="lista-perguntas__r">{{ s.resumo }}</span></a></li>
-    {% endfor %}
+  <p>A página que você procurou não existe ou mudou de endereço. Escolha uma das calculadoras abaixo.</p>
+  <ul class="cartoes cartoes--compacto">
+    {% for s in ativos %}{{ cartao(s, raiz) }}{% endfor %}
   </ul>
 </article>
 {% endblock %}

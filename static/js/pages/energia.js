@@ -48,7 +48,7 @@ function linhaAparelho(a, idx) {
   }
   li.querySelector(".aparelho__remover").addEventListener("click", () => {
     li.remove();
-    calcular();
+    ligarFormulario.recalcular();
   });
   return li;
 }
@@ -70,7 +70,7 @@ function adicionar(a) {
   const li = linhaAparelho(a);
   lista.appendChild(li);
   li.querySelector(".aparelho__nome").focus();
-  calcular();
+  ligarFormulario.recalcular();
 }
 
 catalogo.addEventListener("change", () => {

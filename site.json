@@ -1,6 +1,6 @@
 {
   "nome": "Faz as Contas",
-  "slogan": "Simuladores para decidir com números, não no chute.",
+  "slogan": "Calculadoras financeiras gratuitas, com a conta explicada.",
   "url_base": "https://gustavoaru88.github.io/faz-as-contas",
   "dominio_proprio": "",
   "email_contato": "contato@seudominio.com.br",
@@ -16,6 +16,9 @@
     {
       "slug": "motorista-de-aplicativo",
       "status": "ativo",
+      "nome": "Calculadora do motorista de aplicativo",
+      "icone": "carro",
+      "palavras": "uber 99 indrive motorista carro corrida combustível gasolina lucro renda",
       "pergunta": "Vale a pena rodar de aplicativo?",
       "titulo_seo": "Calculadora do motorista de aplicativo: quanto sobra de verdade",
       "descricao": "Descubra quanto você lucra por hora e por mês como motorista de Uber, 99 ou inDrive, descontando combustível, manutenção, seguro, IPVA e a desvalorização do carro.",
@@ -43,10 +46,13 @@
     {
       "slug": "alugar-ou-comprar-imovel",
       "status": "ativo",
+      "nome": "Alugar ou comprar imóvel",
+      "icone": "casa",
+      "palavras": "aluguel alugar comprar casa apartamento financiamento imobiliário sac price casa própria",
       "pergunta": "Alugar ou financiar um imóvel?",
       "titulo_seo": "Alugar ou comprar imóvel financiado? Simulador completo",
       "descricao": "Compare alugar e investir a diferença com financiar um imóvel pelo SAC ou Price. Veja o patrimônio de cada caminho ano a ano, com valorização, reajuste do aluguel e rendimento dos investimentos.",
-      "resumo": "Patrimônio de cada caminho ano a ano, SAC ou Price.",
+      "resumo": "Compare financiar com alugar e investir a diferença, ano a ano.",
       "categoria": "Moradia",
       "faq": [
         {
@@ -70,10 +76,13 @@
     {
       "slug": "consumo-de-energia",
       "status": "ativo",
+      "nome": "Consumo de energia por aparelho",
+      "icone": "raio",
+      "palavras": "luz conta de luz energia elétrica kwh chuveiro ar-condicionado geladeira aparelho",
       "pergunta": "Quanto cada aparelho pesa na conta de luz?",
       "titulo_seo": "Calculadora de consumo de energia por aparelho",
       "descricao": "Calcule quanto o chuveiro, o ar-condicionado, a geladeira e outros aparelhos gastam por mês na sua conta de luz, em kWh e em reais, usando a tarifa da sua conta.",
-      "resumo": "Gasto por aparelho em kWh e reais, com a sua tarifa.",
+      "resumo": "Quanto cada aparelho gasta por mês, em kWh e em reais.",
       "categoria": "Casa",
       "faq": [
         {
@@ -97,6 +106,9 @@
     {
       "slug": "financiamento-ou-consorcio",
       "status": "em_breve",
+      "nome": "Financiamento ou consórcio",
+      "icone": "documento",
+      "palavras": "carro veículo consórcio financiamento parcela",
       "pergunta": "Financiar o carro ou entrar num consórcio?",
       "resumo": "Custo total de cada opção e quanto tempo até ter o carro.",
       "categoria": "Veículos"
@@ -104,13 +116,19 @@
     {
       "slug": "energia-solar",
       "status": "em_breve",
+      "nome": "Simulador de energia solar",
+      "icone": "sol",
+      "palavras": "painel solar placas fotovoltaica conta de luz economia",
       "pergunta": "Em quanto tempo a energia solar se paga?",
-      "resumo": "Retorno do investimento com a tarifa da sua distribuidora.",
+      "resumo": "Em quanto tempo o investimento se paga com a sua tarifa.",
       "categoria": "Casa"
     },
     {
       "slug": "clt-ou-pj",
       "status": "em_breve",
+      "nome": "Calculadora CLT ou PJ",
+      "icone": "maleta",
+      "palavras": "salário emprego carteira assinada pj mei imposto proposta",
       "pergunta": "CLT ou PJ: qual proposta paga mais?",
       "resumo": "Salário, benefícios, impostos e férias lado a lado.",
       "categoria": "Trabalho e renda"
@@ -118,8 +136,11 @@
     {
       "slug": "antecipar-ou-investir",
       "status": "em_breve",
+      "nome": "Antecipar parcelas ou investir",
+      "icone": "porcentagem",
+      "palavras": "dívida parcela juros quitar empréstimo financiamento investir",
       "pergunta": "Antecipar parcelas ou investir o dinheiro?",
-      "resumo": "Quanto você economiza de juros contra quanto renderia.",
+      "resumo": "Quanto economiza de juros contra quanto renderia.",
       "categoria": "Dívidas"
     }
   ]

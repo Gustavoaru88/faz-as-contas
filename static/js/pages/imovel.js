@@ -19,7 +19,7 @@ function calcular() {
 
   const frase = document.getElementById("r-frase");
   if (empate) {
-    frase.innerHTML = `Em ${anosTexto(v.horizonteAnos)}, os dois caminhos chegam <mark>praticamente empatados</mark>.`;
+    frase.innerHTML = `Em ${anosTexto(v.horizonteAnos)}, os dois caminhos chegam <mark>praticamente empatados</mark>`;
   } else {
     const caminho = r.melhor === "comprar" ? "comprar financiado" : "alugar e investir a diferença";
     frase.innerHTML = `Em ${anosTexto(v.horizonteAnos)}, ${caminho} deixa você com <mark></mark> a mais.`;
