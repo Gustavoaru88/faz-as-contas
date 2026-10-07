@@ -5,7 +5,9 @@ Uso:
     python build.py --servir   # gera e abre um servidor local em http://localhost:8000
 """
 
+import hashlib
 import json
+import re
 import shutil
 import sys
 from datetime import date
@@ -42,6 +44,25 @@ def formatar_data(iso):
              "agosto", "setembro", "outubro", "novembro", "dezembro"]
     d = date.fromisoformat(iso)
     return f"{d.day} de {meses[d.month - 1]} de {d.year}"
+
+
+def versao_arquivos():
+    h = hashlib.sha1()
+    for arq in sorted((RAIZ / "static").rglob("*")):
+        if arq.is_file():
+            h.update(arq.relative_to(RAIZ).as_posix().encode())
+            h.update(arq.read_bytes())
+    return h.hexdigest()[:10]
+
+
+def marcar_versao_nos_imports(pasta_js, versao):
+    """Acrescenta ?v=versao aos imports entre os arquivos JS (ex.: "../comum.js")."""
+    padrao = re.compile(r'(from\s+["\'])(\.{1,2}/[^"\']+?\.js)(["\'])')
+    for arq in pasta_js.rglob("*.js"):
+        texto = arq.read_text(encoding="utf-8")
+        novo = padrao.sub(lambda m: f"{m.group(1)}{m.group(2)}?v={versao}{m.group(3)}", texto)
+        if novo != texto:
+            arq.write_text(novo, encoding="utf-8")
 
 
 def dados_estruturados(sim, config):
@@ -95,6 +116,12 @@ def main():
         shutil.rmtree(SAIDA)
     SAIDA.mkdir()
     shutil.copytree(RAIZ / "static", SAIDA / "static")
+
+    # Versão dos arquivos: muda sempre que algo em static/ muda. Vai no fim dos
+    # endereços (estilo.css?v=...) para o navegador nunca misturar versão nova e antiga.
+    versao = versao_arquivos()
+    env.globals["versao"] = versao
+    marcar_versao_nos_imports(SAIDA / "static" / "js", versao)
 
     for s in config["simuladores"]:
         s["cor"] = CORES_CATEGORIA.get(s["categoria"], "verde")

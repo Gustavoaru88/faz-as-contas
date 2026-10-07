@@ -18,11 +18,12 @@
   <meta property="og:url" content="{{ site.url_base }}/{{ caminho }}{% if caminho %}/{% endif %}">
   <meta name="twitter:card" content="summary">
 
-  <link rel="icon" href="{{ raiz }}static/img/icone.svg" type="image/svg+xml">
+  <link rel="icon" href="{{ raiz }}static/img/icone.svg?v={{ versao }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ raiz }}static/img/icone-180.png?v={{ versao }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ raiz }}static/css/estilo.css">
+  <link rel="stylesheet" href="{{ raiz }}static/css/estilo.css?v={{ versao }}">
 
   {% if site.google_analytics_id %}
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_id }}"></script>
